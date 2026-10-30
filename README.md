@@ -21,3 +21,10 @@ Get-FileHash .\HIDUSBF-4.0.0-Setup.exe -Algorithm SHA256
 - Uninstalling HIDUSBF leaves the driver in place. Remove it first from **Driver > Uninstall service** in the app if you want it gone.
 
 Report problems in [Issues](https://github.com/KazboXIII/HIDUSBF/issues).
+
+## Website
+
+GitHub Pages serves this repository's `main` branch at https://hidusbf.app/.
+The controller information guide lives in `information/index.html` and uses the shared stylesheet plus `information/information.css`. It requires no build step, JavaScript or third-party runtime dependency.
+
+When updating the guide, check exact hardware/firmware revisions against the cited primary documentation, distinguish vendor claims from measurements, and update the research date only for a substantive source review. Keep inline source anchors, the source notes and homepage navigation working. The guide's polling chart shows calculated intervals, not latency measurements.

@@ -69,6 +69,9 @@ h3 { margin: 0 0 6px; color: var(--text); font-size: 18px; }
 .card p { margin: 0; color: var(--muted); font-size: 15px; }
 
 /* Install */
+.info-link-section { padding-top: 48px; padding-bottom: 64px; border-top: 1px solid var(--line); }
+.info-link-section > p:not(.tag) { max-width: 680px; color: var(--muted); margin: 0 0 24px; }
+.nav nav a:focus-visible, .button:focus-visible, footer a:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 5px; }
 .install { padding-top: clamp(48px, 8vw, 96px); padding-bottom: clamp(56px, 8vw, 96px); border-top: 1px solid var(--line); }
 .install ol { list-style: none; margin: 0 0 32px; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .install li { display: flex; gap: 14px; padding: 22px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
