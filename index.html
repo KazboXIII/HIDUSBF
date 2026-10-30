@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HIDUSBF: polling rates and controller calibration for Windows</title>
+<meta name="description" content="Overclock the USB polling rate of your mouse, keyboard or controller up to 8 kHz, and calibrate PlayStation controller sticks. Free for Windows.">
+<meta property="og:title" content="HIDUSBF">
+<meta property="og:description" content="Polling rates up to 8 kHz, controller calibration and lighting, in one Windows app.">
+<meta property="og:image" content="https://hidusbf.app/assets/calibration.png">
+<meta property="og:url" content="https://hidusbf.app/">
+<meta name="theme-color" content="#020203">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top"><img src="assets/icon.svg" alt="" width="28" height="28">HIDUSBF</a>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#install">Install</a>
+    <a href="https://github.com/KazboXIII/HIDUSBF/releases">Releases</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <img class="hero-icon" src="assets/icon.svg" alt="" width="88" height="88">
+    <p class="eyebrow">For Windows</p>
+    <h1>HIDUSBF</h1>
+    <p class="lede">Overclock the polling rate of your mouse, keyboard or controller, and calibrate your controller's sticks. All in one place.</p>
+    <div class="cta">
+      <a class="button primary" id="download" href="https://github.com/KazboXIII/HIDUSBF/releases/latest">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>
+        <span id="download-label">Download for Windows</span>
+      </a>
+      <a class="button" href="#features">See what it does</a>
+    </div>
+    <p class="fine" id="download-meta">Free · Windows 8.1, 10 and 11 · 64-bit</p>
+    <figure class="hero-shot">
+      <img src="assets/calibration.png" alt="HIDUSBF calibration tab for a DualSense Edge, with Smart calibration set to Loose" width="770" height="815">
+    </figure>
+  </section>
+
+  <section class="features" id="features">
+    <article class="feature">
+      <div class="text">
+        <p class="tag mono">up to 8,000 Hz</p>
+        <h2>Polling rate</h2>
+        <p>Pick a rate for any USB mouse, keyboard or controller: 250, 500, 1000, 2000, 4000 or 8000 Hz. HIDUSBF installs SweetLow's hidusbf filter driver, attaches it to the device you choose and restarts the device for you.</p>
+        <p>The live input panel shows the real report rate, so you can see whether the device keeps up.</p>
+      </div>
+      <img src="assets/polling.png" alt="Polling rate set to 8,000 Hz with live stick input reading 8,007 reports per second" width="524" height="665" loading="lazy">
+    </article>
+
+    <article class="feature flip">
+      <div class="text">
+        <p class="tag mono">DualSense · DualSense Edge · DualShock 4</p>
+        <h2>Controller calibration</h2>
+        <p>Fix stick drift, teach the controller each stick's full range, or fine-tune the stored values while you watch the stick check.</p>
+        <p>Smart calibration re-measures both sticks and sets how they feel: <span class="hl">Loose</span> for lighter, quicker aim or <span class="hl">Tight</span> for steadier aim. It's stored on the controller, so it works in every game.</p>
+        <p>Changes stay temporary until you save them, and every connection keeps a snapshot you can restore.</p>
+      </div>
+      <img src="assets/smart-calibration.png" alt="Smart calibration set to Loose and Strong, above the manual center, range and fine-tune tools" width="703" height="368" loading="lazy">
+    </article>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Lights</h3>
+        <p>Set your controller's light bar and player LEDs, and the per-key lighting on a SteelSeries Apex Pro TKL Gen 3. Your colors are saved.</p>
+      </div>
+      <div class="card">
+        <h3>Profiles</h3>
+        <p>Save a controller's settings as a profile and switch between them from the top of the page. Lights and trigger resistance come back every time it connects.</p>
+      </div>
+      <div class="card">
+        <h3>Every device, by name</h3>
+        <p>An overview of what's plugged in, with real product names and pictures instead of USB IDs.</p>
+      </div>
+      <div class="card">
+        <h3>Keeps itself current</h3>
+        <p>HIDUSBF checks for a new version while it starts and asks before installing anything.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="install" id="install">
+    <h2>Install</h2>
+    <ol>
+      <li><span class="n mono">1</span><div><h3>Download and run the installer</h3><p>It installs to Program Files and adds HIDUSBF to the Start menu. HIDUSBF needs administrator rights because it manages a driver.</p></div></li>
+      <li><span class="n mono">2</span><div><h3>Install the driver once</h3><p>Open <span class="hl">Driver</span> in the sidebar and install the service. The first-start tour walks you through it.</p></div></li>
+      <li><span class="n mono">3</span><div><h3>Pick a device and a rate</h3><p>Open a device, turn on the filter, choose a rate and restart the device. Re-plug it or reboot if the rate doesn't change.</p></div></li>
+    </ol>
+    <div class="notes">
+      <p><span class="hl">SmartScreen warning?</span> The installer isn't code-signed yet. Choose More info, then Run anyway. Each release has a .sha256 file if you want to check the download.</p>
+      <p><span class="hl">Uninstalling</span> leaves the driver in place. To remove it, turn the filter off on every device, then uninstall the service from Driver before removing the app.</p>
+      <p><span class="hl">Results vary.</span> How fast a device can really report depends on the device and your USB controller. The live input panel shows what you actually get.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>hidusbf by SweetLow (Public Domain). Drivers for Windows Vista and later signed by Jeshua Starr Scully with help from overclock.net. Drivers for Windows 8.1 and later signed by Battle Beaver Customs. Controller calibration ported from dualshock-tools by the_al (MIT). Fonts: IBM Plex (SIL Open Font License).</p>
+  <p class="links"><a href="https://github.com/KazboXIII/HIDUSBF/releases">Releases</a><a href="https://github.com/KazboXIII/HIDUSBF/issues">Report a problem</a><a href="https://github.com/LordOfMice/hidusbf">hidusbf</a></p>
+</footer>
+
+<script>
+// Point the download button straight at the newest installer (falls back to the Releases page).
+fetch('https://api.github.com/repos/KazboXIII/HIDUSBF/releases/latest')
+  .then(function (r) { return r.ok ? r.json() : null; })
+  .then(function (rel) {
+    if (!rel) return;
+    var a = (rel.assets || []).filter(function (x) { return /-Setup\.exe$/.test(x.name); })[0];
+    if (!a) return;
+    document.getElementById('download').href = a.browser_download_url;
+    document.getElementById('download-label').textContent = 'Download ' + rel.tag_name.replace(/^v/, '');
+    document.getElementById('download-meta').textContent = 'Free · Windows 8.1, 10 and 11 · 64-bit · ' + (a.size / 1048576).toFixed(1) + ' MB';
+  })
+  .catch(function () {});
+</script>
+</body>
+</html>
