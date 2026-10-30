@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Controller Information: TMR, Hall, JS13, 5-pin &amp; Boards | HIDUSBF</title>
-<meta name="description" content="A sourced guide to controller sticks, TMR vs Hall effect, JS13, 3-pin and 5-pin interfaces, Marius and other boards, polling rates, latency and calibration.">
+<title>Controller Guide: Polling Rate, Hall vs TMR, Sticks &amp; Boards | HIDUSBF</title>
+<meta name="description" content="A plain-English guide for players and controller shoppers: polling rate vs input lag, Hall effect vs TMR sticks, JS13, 3-pin vs 5-pin, custom boards and calibration, with what's measured kept apart from what's only claimed.">
 <meta name="theme-color" content="#020203">
-<meta property="og:title" content="Controller information, without the guesswork | HIDUSBF">
-<meta property="og:description" content="Understand the hardware behind the headlines. Stick sensors, board revisions, compatibility and the limits of performance claims.">
+<meta property="og:title" content="Know what you're actually buying | HIDUSBF controller guide">
+<meta property="og:description" content="Hall, TMR, 8K, five-pin: every label on a controller listing, explained in plain English. Measured results kept apart from maker claims.">
 <meta property="og:url" content="https://hidusbf.app/information/">
 <meta property="og:type" content="article">
 <link rel="canonical" href="https://hidusbf.app/information/">
@@ -29,128 +29,86 @@
 <main id="content">
   <section class="info-hero" aria-labelledby="page-title">
     <p class="eyebrow mono">INFORMATION / CONTROLLERS</p>
-    <h1 id="page-title">Know what’s<br>inside your controller.</h1>
-    <p class="info-lede">TMR. Hall effect. JS13. Five pins. Eight thousand hertz. The names are everywhere. Here’s what they actually tell you—and what they don’t.</p>
-    <div class="edition"><span class="edition-dot" aria-hidden="true"></span><span>Research checked <time datetime="2026-10-30">30 October 2026</time></span><span>Hardware &amp; firmware specific</span></div>
-    <div class="takeaway"><p class="mono kicker">START HERE</p><p><strong>A sensor type is not a complete controller specification.</strong> The mechanism, electrical interface, mainboard, firmware, connection and game all matter. There is no single label that settles compatibility or performance.</p></div>
+    <h1 id="page-title">Know what you’re<br>actually buying.</h1>
+    <p class="info-lede">Hall effect. TMR. 8K. Five-pin. Controller listings are full of labels. This page explains each one in plain English, and keeps what has been measured apart from what is only claimed.</p>
+    <div class="edition"><span class="edition-dot" aria-hidden="true"></span><span>Research checked <time datetime="2026-10-30">30 October 2026</time></span><span>About a 10 minute read, or 1 minute if you only read the bold lines</span></div>
+    <div class="takeaway">
+      <p class="mono kicker">THE SHORT VERSION</p>
+      <div>
+        <ol class="short-list">
+          <li><strong>Read the full model name.</strong> “Pro”, “8K PC”, “2C” or “Wired TMR” can mean different sticks, rates and consoles.</li>
+          <li><strong>Hall and TMR sticks resist drift.</strong> They don’t make it impossible.</li>
+          <li><strong>8,000 Hz is how often updates are sent.</strong> It is not your input lag.</li>
+          <li><strong>A number on the box is a claim</strong> until someone measures it on the same model, firmware and connection.</li>
+          <li><strong>Custom boards are a different controller in a familiar shell.</strong> Check what still works, and where.</li>
+        </ol>
+        <p class="jump"><a href="#buying">Shopping right now? Go to the checklist →</a></p>
+      </div>
+    </div>
   </section>
 
   <div class="reading-layout">
     <aside class="contents">
       <nav aria-label="On this page">
         <p class="mono kicker">ON THIS PAGE</p>
-        <a href="#basics"><span>01</span> The hardware layers</a>
-        <a href="#sensors"><span>02</span> Potentiometer, Hall &amp; TMR</a>
-        <a href="#modules"><span>03</span> JS13 &amp; other modules</a>
-        <a href="#pins"><span>04</span> 3-pin vs 5-pin</a>
-        <a href="#boards"><span>05</span> Marius &amp; other boards</a>
-        <a href="#specs"><span>06</span> Reading the specs</a>
-        <a href="#calibration"><span>07</span> Calibration &amp; testing</a>
-        <a href="#myths"><span>08</span> Common misconceptions</a>
+        <a href="#words"><span>01</span> Jargon in one line</a>
+        <a href="#sensors"><span>02</span> Stick sensors</a>
+        <a href="#specs"><span>03</span> Polling rate &amp; lag</a>
+        <a href="#myths"><span>04</span> Measured vs claimed</a>
+        <a href="#basics"><span>05</span> Same name, different pad</a>
+        <a href="#modules"><span>06</span> Stick modules &amp; pins</a>
+        <a href="#boards"><span>07</span> Custom boards</a>
+        <a href="#calibration"><span>08</span> Calibration &amp; testing</a>
         <a href="#buying"><span>09</span> Before you buy</a>
-        <a href="#sources"><span>10</span> Sources &amp; corrections</a>
+        <a href="#sources"><span>10</span> Sources</a>
       </nav>
-      <p class="contents-note">Engineering principles, documented product details and unanswered questions are identified separately.</p>
+      <p class="contents-note">Every fact links to its source. Coloured tags show what kind of evidence it is: measured, maker spec, arithmetic or marketing.</p>
     </aside>
 
     <article class="guide" aria-label="Controller hardware guide">
-      <section id="basics" class="chapter">
-        <p class="mono chapter-number">01 / THE HARDWARE LAYERS</p>
-        <h2>Same shell. Different controller.</h2>
-        <p>A PlayStation-shaped controller can contain the original Sony mainboard, an original board with modifications, or an entirely different replacement board. Those are different products, even when the outside looks identical.</p>
-        <div class="layer-list">
-          <div><span class="mono">01</span><div><h3>Mechanism</h3><p>The gimbal, spring, stick height, travel and click switch. These determine much of the physical feel and return to center.</p></div></div>
-          <div><span class="mono">02</span><div><h3>Sensor &amp; interface</h3><p>How movement is measured, and how the signal reaches the board. A model name, a sensing principle and a connector are different descriptions.</p></div></div>
-          <div><span class="mono">03</span><div><h3>Mainboard &amp; firmware</h3><p>The electronics and onboard software that read inputs, apply calibration and filtering, and construct reports.</p></div></div>
-          <div><span class="mono">04</span><div><h3>Connection, host &amp; game</h3><p>USB, Bluetooth or a wireless receiver; the protocol and platform; then the game’s deadzones, response curve and frame timing.</p></div></div>
-        </div>
-        <h3>Stock, modified and modular mean different things</h3>
-        <p>A <strong>stock controller</strong> retains its factory configuration. An <strong>OEM-board custom build</strong> adds things such as rear buttons, replacement sticks or trigger switches around the original mainboard. A <strong>replacement-board build</strong> changes the controller’s electronic platform. Compatibility must follow the installed board, not the shell badge.</p>
-        <p><strong>Modular</strong> describes replaceability. Sony’s DualSense Edge has user-replaceable stick assemblies; that feature alone says nothing about the sensing technology inside a replacement. Swapping the complete Edge assembly is also different from desoldering the mechanism inside it. <a class="cite" href="#source-sony">Sony’s replacement instructions ↗</a></p>
-        <p>Likewise, XInput or a “DS4 mode” names an input interface or emulation mode. It does not certify every original feature or console authentication requirement. <a class="cite" href="#source-xinput">Microsoft’s interface documentation ↗</a> <a class="cite" href="#source-gp2040">GP2040-CE compatibility notes ↗</a></p>
+      <section id="words" class="chapter">
+        <p class="mono chapter-number">01 / JARGON IN ONE LINE</p>
+        <h2>The words you’ll see, explained.</h2>
+        <p>Skim this once and the rest of the page (and most product listings) gets much easier.</p>
+        <dl class="terms glossary">
+          <div><dt>Polling rate (Hz)</dt><dd>How often the PC asks the controller for an update. 1,000 Hz is once every millisecond.</dd></div>
+          <div><dt>Report rate</dt><dd>How many updates actually arrive each second. It can be lower than the polling rate.</dd></div>
+          <div><dt>Input lag (latency)</dt><dd>Time from your press to the result. It needs its own test; you can’t work it out from Hz.</dd></div>
+          <div><dt>Stick drift</dt><dd>The stick reports movement when nobody is touching it.</dd></div>
+          <div><dt>Potentiometer stick</dt><dd>The classic stick (Alps is the well-known maker). A contact slides over a track, and that track can wear.</dd></div>
+          <div><dt>Hall effect</dt><dd>A magnetic stick sensor. Nothing slides inside the sensor itself.</dd></div>
+          <div><dt>TMR</dt><dd>Tunnelling magnetoresistance: a different magnetic sensor. Also contactless, and not a kind of Hall.</dd></div>
+          <div><dt>JS13, RJ13, FJH10K…</dt><dd>Model names of stick modules, not sensor types. Always check the full part name.</dd></div>
+          <div><dt>3-pin / 5-pin</dt><dd>How a stick is wired. It tells you about fit, not speed.</dd></div>
+          <div><dt>Mainboard</dt><dd>The controller’s main electronics. Custom builds may swap it for a different board, such as Marius.</dd></div>
+          <div><dt>Remap kit</dt><dd>Adds back paddles that press existing buttons. The original board stays.</dd></div>
+          <div><dt>Deadzone</dt><dd>A zone (around centre, or at the edge) where stick movement is ignored or capped.</dd></div>
+          <div><dt>Calibration</dt><dd>Telling the controller where centre and the edges are. It fixes offsets, not worn parts.</dd></div>
+          <div><dt>ADC / bits</dt><dd>Turns stick position into a number. More bits means more possible values, not automatically more accuracy.</dd></div>
+          <div><dt>XInput</dt><dd>The “Xbox controller” interface most Windows games read. Other controllers can pretend to be one.</dd></div>
+        </dl>
       </section>
 
       <section id="sensors" class="chapter">
-        <p class="mono chapter-number">02 / POSITION SENSING</p>
+        <p class="mono chapter-number">02 / STICK SENSORS</p>
         <h2>Three ways to read a stick.</h2>
-        <p>The sensing element measures position. It does not, by itself, decide the controller’s polling rate, physical tension or console support.</p>
+        <p>The sensor measures where the stick is. <strong>It doesn’t set the polling rate, the stick tension or which consoles the controller works with.</strong></p>
         <div class="sensor-grid">
-          <div class="sensor-card"><p class="mono kicker">CONTACT</p><h3>Potentiometer</h3><p>A moving contact travels over a resistive element. The changing voltage represents position. Wear or contamination can affect the reading.</p><p class="sensor-foot">Common reference: Alps Alpine RKJXV.</p></div>
-          <div class="sensor-card"><p class="mono kicker">MAGNETIC</p><h3>Hall effect</h3><p>A Hall sensor reads a magnetic field as the mechanism moves a magnet. The position sensing does not need a sliding electrical contact.</p><p class="sensor-foot">Contactless sensing; mechanical parts remain.</p></div>
-          <div class="sensor-card"><p class="mono kicker">MAGNETIC</p><h3>TMR</h3><p>Tunneling magnetoresistance uses a magnetic element whose electrical resistance changes with the field. It is a different physical effect from Hall sensing.</p><p class="sensor-foot">Also contactless; not a type of Hall effect.</p></div>
+          <div class="sensor-card"><p class="mono kicker">CONTACT</p><h3>Potentiometer</h3><p>A contact slides over a resistive track and the voltage tells the board where the stick is.</p><p class="sensor-foot"><strong>For you:</strong> standard in many stock controllers. A worn or dirty track is a classic cause of drift.</p></div>
+          <div class="sensor-card"><p class="mono kicker">MAGNETIC</p><h3>Hall effect</h3><p>A sensor reads the field of a magnet that moves with the stick.</p><p class="sensor-foot"><strong>For you:</strong> no sliding contact in the sensor, so that wear point is gone. Springs and gimbals still wear.</p></div>
+          <div class="sensor-card"><p class="mono kicker">MAGNETIC</p><h3>TMR</h3><p>A magnetic element whose resistance changes with the field. Different physics from Hall.</p><p class="sensor-foot"><strong>For you:</strong> also contactless. Often sold as more sensitive or lower power; judge the finished controller, not the sensor name.</p></div>
         </div>
-        <p class="source-line">Principles: <a href="#source-alps">Alps Alpine</a>, <a href="#source-ti">Texas Instruments</a> and <a href="#source-tdk">TDK</a>.</p>
-        <h3>“Anti-drift” needs a little translation</h3>
-        <p>Hall and TMR eliminate the sliding sensor contact as a wear mechanism. They do not eliminate spring fatigue, loose mechanical parts, magnet alignment errors, electronics faults or poor calibration. A contactless sensor can still report a position away from center. <a class="cite" href="#source-ti">Magnetic joystick design and error sources ↗</a></p>
-        <p>TMR can offer useful sensitivity and power advantages in a particular design. That does not establish that every TMR controller is more accurate, faster or more efficient than every Hall controller. Compare the finished implementation and measurements.</p>
-        <div class="callout"><strong>Analog vs digital is a separate question.</strong><p>Hall and TMR sensors can feed analog outputs into a board’s analog-to-digital converter (ADC). Other designs use a digital interface. “Magnetic” does not automatically mean “digital.” <a class="cite" href="#source-ti">TI’s analog-output design examples ↗</a></p></div>
-      </section>
-
-      <section id="modules" class="chapter">
-        <p class="mono chapter-number">03 / MODULE NAMES</p>
-        <h2>JS13 is a model. TMR is a technology.</h2>
-        <p>A module includes more than its sensing principle. Its dimensions, mechanics, output range and electrical arrangement still have to suit the controller.</p>
-        <div class="table-wrap" role="region" aria-label="Joystick module reference table" tabindex="0">
-          <table><caption>Examples from manufacturer or factory-associated documentation. These are identification notes, not a performance ranking.</caption><thead><tr><th scope="col">Name you may see</th><th scope="col">What is documented</th><th scope="col">What to check</th></tr></thead><tbody>
-            <tr><th scope="row">Alps Alpine RKJXV</th><td>A potentiometer stick family. The specific RKJXV122400R lists 10 kΩ, 5 V DC maximum and up to 23° operating angle in each direction.</td><td>Exact part number and dimensions. Those ratings are not universal OEM controller specifications. <a href="#source-alps">Source ↗</a></td></tr>
-            <tr><th scope="row">K-Silver JS13 Pro+</th><td>The factory-associated listing identifies a TMR product with separate controller variants.</td><td>Full suffix, revision and intended controller. “JS13” alone is insufficient. No single factory electrical datasheet covering all variants was verified for this guide. <a href="#source-ksilver">Source ↗</a></td></tr>
-            <tr><th scope="row">GuliKit TMR replacements</th><td>The maker lists specific supported controllers and a post-install calibration procedure.</td><td>The matching variant and installation instructions. “Direct replacement” does not mean every installation is solder-free. <a href="#source-gulikit">Source ↗</a></td></tr>
-            <tr><th scope="row">Favor Union FJH10K TMR</th><td>An explicitly identified TMR product. Favor Union also makes other sensor types.</td><td>Technology suffix and configuration. A manufacturer’s name alone does not identify its sensor. <a href="#source-favor">Source ↗</a></td></tr>
-            <tr><th scope="row">Ginfull RJ13 TMR</th><td>A TMR product in the maker’s catalogue.</td><td>Exact factory part and revision. Marketplace “V” numbers and housing colors are not a universal identification system. <a href="#source-ginfull">Source ↗</a></td></tr>
-          </tbody></table>
-        </div>
-        <h3>Frame, sensor and seller may be three different names</h3>
-        <p>A builder can retain an OEM mechanical frame and fit another supplier’s sensors. “ALPS base” therefore need not mean standard ALPS potentiometers remain installed. Ask who made the mechanism and who made the sensors, especially for a hybrid or branded upgrade.</p>
-        <p><strong>Tension is mechanical resistance.</strong> More spring force or a different stick height changes feel and leverage. A firmware sensitivity curve changes how movement is translated into output. One does not substitute for the other. Cycle ratings, where published, describe specified component tests—not a guaranteed number of years of gaming.</p>
-      </section>
-
-      <section id="pins" class="chapter">
-        <p class="mono chapter-number">04 / ELECTRICAL COMPATIBILITY</p>
-        <h2>Five pins aren’t a speed rating.</h2>
-        <p>First ask what is being counted: pins on one sensor, contacts on a connector, or all terminals on a mechanism. “3-pin” and “5-pin” are not universal interchangeability standards.</p>
-        <div class="pin-comparison">
-          <div><p class="mono kicker">3-PIN / COMMON ANALOG ARRANGEMENT</p><h3>More than one sensor technology</h3><p>A conventional axis circuit can use three connections. Compatible magnetic replacements can occupy this kind of interface too. Three pins do not necessarily mean a carbon-track potentiometer.</p></div>
-          <div><p class="mono kicker">5-PIN / SPECIFIC IMPLEMENTATION</p><h3>Requires a matching design</h3><p>Additional connections may support a different interface, but their functions must come from the design documentation. You cannot infer the protocol, resolution or polling rate from the count.</p></div>
-        </div>
-        <div class="callout"><strong>Concrete example: Marius / MIDAS.</strong><p>Battle Beaver documents its MIDAS option as a five-pin <strong>Hall-effect</strong> system. In its documented JDM-5X configurations, the three-pin and five-pin boards and mechanisms are not interchangeable; changing system requires the corresponding PCB. This is a compatibility rule for that implementation, not a rule for every five-pin product. <a class="cite" href="#source-bb">Builder’s technical documentation ↗</a></p></div>
-        <p>For any proposed swap, confirm <strong>footprint, pin functions, supply voltage, output levels, axis orientation, supported firmware and calibration</strong>. A part fitting the holes is only one check. Never assume two additional pins automatically make a stick faster or more accurate.</p>
-      </section>
-
-      <section id="boards" class="chapter">
-        <p class="mono chapter-number">05 / CONTROLLER BOARDS</p>
-        <h2>The board matters. So does its revision.</h2>
-        <p>A <strong>mainboard</strong> runs the controller. A <strong>remap board</strong> adds ways to activate existing controls. A <strong>calibration daughterboard</strong> adjusts a compatible stick circuit. A Windows USB filter changes host-side behavior. These are different jobs.</p>
-        <div class="board-entry"><div class="board-heading"><h3>Marius / MH family</h3><span class="evidence">Maker + builder documentation</span></div>
-          <p>Marius replacement boards are a separate hardware platform, not an original Sony board with an overclock setting. The maker’s October 2025 MH4 Analog announcement describes a PC-only DS4-format board, supplied without sticks, without rumble, sound or gyro. It says analog and digital variants have approximately the same speed. Those details belong to that product generation. <a class="cite" href="#source-marius-product">Maker announcement ↗</a></p>
-          <p>MH4, MH5 and other family/build names need their own specifications. Battle Beaver currently lists DS4-, DualSense- and Xbox-format Marius builds with native 8K PC polling; a shell format does not establish support for its original console. <a class="cite" href="#source-bb">Builder’s current family listings ↗</a></p>
-          <p>The developer documentation distinguishes configuration mode from normal operation: its setup mode runs at 100–300 Hz. Measuring in that mode does not establish gaming-mode performance. DeepPoll measures polling, not the full input-to-screen delay. <a class="cite" href="#source-marius-dev">Developer docs ↗</a> <a class="cite" href="#source-deeppoll">DeepPoll release notes ↗</a></p>
-        </div>
-        <div class="board-entry"><div class="board-heading"><h3>FireBird / Firebird A*</h3><span class="evidence">Revision-specific documentation</span></div>
-          <p>The creator’s older, multi-form-factor FireBird manual explicitly covers PCB v2.4, tool v2.15 and firmware v2.24. It documents 1,000 Hz in non-Switch modes. This is not a verified specification for every DS4 or A* build. Newer generations must not inherit every spec from that manual—or have their specs applied backward to it. <a class="cite" href="#source-firebird-manual">Creator’s scoped manual ↗</a></p>
-          <p>The creator separates legacy firmware tools from the newer browser configurator. Confirm the board, firmware branch, input mode and tool together. The configurator also warns about configuration loss when downgrading. A brand name or a screenshot of a settings menu is not enough to establish a build’s performance. <a class="cite" href="#source-firebird-tool">Creator’s configurator ↗</a></p>
-        </div>
-        <div class="board-entry"><div class="board-heading"><h3>Helium Strike / HyperStrike listings</h3><span class="evidence limited">Verification limited</span></div>
-          <p>These names appear in custom-builder listings, but a complete current hardware specification and revision cross-reference could not be verified from the HS2 configuration page during this research. We therefore do not assign a universal polling rate, console list or retained-feature list to the name. <a class="cite" href="#source-hs2">HS2 configuration page ↗</a></p>
-          <p>Ask the builder for the exact PCB and firmware, whether it is a legacy or current product, and the supported mode on your platform. An inaccessible configurator is a research limit, not evidence that a controller is faulty.</p>
-        </div>
-        <div class="board-entry"><div class="board-heading"><h3>SuiOvOi</h3><span class="evidence">Configurator evidence</span></div>
-          <p>Its configuration interface exposes USB report rate, stick sampling rate, output precision and sampling precision as separate controls. That is a useful illustration of why those figures are not interchangeable. Available settings do not prove effective sensor accuracy, measured latency or compatibility of every board sold under the name. <a class="cite" href="#source-suiovoi">Configuration interface ↗</a></p>
-        </div>
-        <div class="board-entry"><div class="board-heading"><h3>GP2040-CE</h3><span class="evidence">Open project documentation</span></div>
-          <p>GP2040-CE is controller firmware for RP2040-based boards, widely used in custom arcade and leverless controllers. It is not one universal drop-in DualSense motherboard. Its console documentation makes authentication and game-category requirements explicit. “PS5 mode” does not mean unrestricted support for every PS5 game. <a class="cite" href="#source-gp2040">Official compatibility documentation ↗</a></p>
-        </div>
-        <div class="board-entry"><div class="board-heading"><h3>Remap kits: eXtremeRate and similar</h3><span class="evidence">Exact-SKU documentation</span></div>
-          <p>For example, eXtremeRate’s RISE4 Plus MAX SKU HKCPFJ001M3 adds rear controls and lists particular DualSense BDM revisions. That is a remap kit, not a replacement input-processing mainboard. Compatibility and soldering requirements belong to the specific kit and functions selected. <a class="cite" href="#source-extremerate">Manufacturer’s kit specification ↗</a></p>
-        </div>
-        <div class="callout"><strong>8K does not inherently remove features.</strong><p>Audio, rumble, gyro, touch tracking, battery use and wireless support depend on the board and complete build. A physical touchpad button can remain even when touch tracking does not. Request a retained-feature list for the exact product.</p></div>
+        <p class="source-line">How they work: <a href="#source-alps">Alps Alpine</a>, <a href="#source-ti">Texas Instruments</a>, <a href="#source-tdk">TDK</a>.</p>
+        <div class="callout"><strong>So is “anti-drift” true?</strong><p>Partly. Hall and TMR remove the most common wear point. A magnetic stick can still drift from a tired spring, loose parts, a misaligned magnet, poor calibration or nearby magnets. One stick maker warns that Xbox trigger magnets can affect its TMR sticks. Read “anti-drift” as “drift-resistant”. <a class="cite" href="#source-ti">Error sources ↗</a> <a class="cite" href="#source-aknes">AKNES V7 warning ↗</a></p></div>
+        <p><strong>Magnetic doesn’t mean digital.</strong> Hall and TMR sticks can send an analog signal, just like a potentiometer, for the board to convert. Others use a digital interface. <a class="cite" href="#source-ti">TI design examples ↗</a></p>
       </section>
 
       <section id="specs" class="chapter">
-        <p class="mono chapter-number">06 / READING THE NUMBERS</p>
-        <h2>Reports per second ≠ input lag.</h2>
-        <p><strong>USB polling interval</strong> describes the host’s service schedule. <strong>Report rate</strong> counts reports actually delivered; it need not match the requested polling rate. <strong>Sampling rate</strong> describes how often inputs are acquired internally. <strong>Latency</strong> is time between a defined action and a defined observation. A claim needs to say which one was measured. <a class="cite" href="#source-usb">USB interval documentation ↗</a> <a class="cite" href="#source-deeppoll">DeepPoll’s measurement scope ↗</a></p>
+        <p class="mono chapter-number">03 / POLLING RATE &amp; LAG</p>
+        <h2>Hz is how often. Not how fast.</h2>
+        <p>Polling rate is how often your PC checks the controller. A higher rate shortens the wait <em>between</em> updates. It doesn’t tell you how long the controller takes to notice your press, or how long the game and screen take to show it.</p>
         <figure class="rate-figure">
-          <figcaption><strong>The nominal interval between reports</strong><span>Arithmetic: 1,000 ÷ Hz = milliseconds. These are intervals, not measured controller latency.</span></figcaption>
+          <figcaption><strong>Time between updates at each rate</strong><span>Simple arithmetic: 1,000 ÷ Hz = milliseconds. This is the gap between reports, not measured input lag.</span></figcaption>
           <div class="rate-row"><span>250 Hz</span><span class="rate-track"><span style="--bar:100%"></span></span><strong>4 ms</strong></div>
           <div class="rate-row"><span>500 Hz</span><span class="rate-track"><span style="--bar:50%"></span></span><strong>2 ms</strong></div>
           <div class="rate-row"><span>1,000 Hz</span><span class="rate-track"><span style="--bar:25%"></span></span><strong>1 ms</strong></div>
@@ -158,87 +116,195 @@
           <div class="rate-row"><span>4,000 Hz</span><span class="rate-track"><span style="--bar:6.25%"></span></span><strong>0.25 ms</strong></div>
           <div class="rate-row"><span>8,000 Hz</span><span class="rate-track"><span style="--bar:3.125%"></span></span><strong>0.125 ms</strong></div>
         </figure>
-        <p>An 8K interval does not establish 0.125 ms button latency, fresh stick data in every report, or a 0.125 ms input-to-screen response. Input scanning, processing, transport, game timing and display timing still sit in the path.</p>
-        <h3>What HIDUSBF can—and cannot—change</h3>
-        <p>The hidusbf filter can alter USB polling behavior for supported configurations on Windows. It does not replace the sensor, increase the physical ADC’s resolution or rewrite the controller’s internal input loop. Requesting a rate does not prove the device produces fresh reports at that rate. Native high-rate firmware and host-side overclocking are different implementations. <a class="cite" href="#source-hidusbf">Original driver documentation ↗</a></p>
-        <p>A Windows USB filter does not overclock Bluetooth, and it does not alter a console’s USB stack. Higher rates can also add processing overhead; verify stability and the result on the actual host.</p>
-        <h3>Bits are not the same thing as usable precision</h3>
-        <p>An 8-bit field has 256 possible codes; 12 bits has 4,096; 16 bits has 65,536. That says how many values can be represented. Noise, sensor quality, conversion, filtering and mechanical repeatability determine how much of that is useful.</p>
-        <p>XInput uses signed 16-bit stick fields, but an API field does not prove the controller captured 16 bits of independent physical position information. Upscaling or interpolation cannot create missing measurements. <a class="cite" href="#source-xinput-structure">Microsoft’s XINPUT_GAMEPAD structure ↗</a></p>
-        <h3>Read tests with their method attached</h3>
-        <p>A useful latency result states the exact controller, board and firmware, connection, input mode, button or stick tested, test method and distribution of results. A best-case screenshot without those details cannot support a universal “fastest controller” claim. GP2040-CE publishes a defined method and mode-specific results rather than equating its polling interval with measured latency. <a class="cite" href="#source-gp2040-performance">Project performance documentation ↗</a></p>
-        <p>A browser gamepad visualizer is useful for checking input behavior. If its loop runs with <code>requestAnimationFrame</code>, observation normally follows display refresh. Do not treat that page’s visual refresh as a direct USB bus measurement. <a class="cite" href="#source-raf">Browser timing documentation ↗</a></p>
-      </section>
-
-      <section id="calibration" class="chapter">
-        <p class="mono chapter-number">07 / CALIBRATION &amp; TESTING</p>
-        <h2>A clean circle isn’t the whole test.</h2>
-        <dl class="terms">
-          <div><dt>Center calibration</dt><dd>Teaches the supported system where neutral is. It can correct an offset; it cannot repair a loose mechanism or damaged sensor.</dd></div>
-          <div><dt>Range calibration</dt><dd>Maps the reachable extremes. Check every direction and diagonal after a change, not just full left and right.</dd></div>
-          <div><dt>Inner deadzone</dt><dd>Ignores movement near center. It can hide small offsets or noise, at the cost of a region with no response. Zero deadzone is not automatically the best usable setting.</dd></div>
-          <div><dt>Outer deadzone</dt><dd>Determines where full output is reached. An aggressive setting can clip travel and make reaching maximum output easier without improving the sensor.</dd></div>
-          <div><dt>Response curve</dt><dd>Changes the relationship between physical displacement and output. Linear, aggressive or softened response is a preference and game interaction, not a sensor type.</dd></div>
-          <div><dt>Filtering &amp; snapback</dt><dd>Filtering can suppress noise or the brief opposite input after a released stick crosses center. Its effect on responsiveness depends on the algorithm and setting.</dd></div>
-        </dl>
-        <p class="source-line">Configuration concepts: <a href="#source-firebird-manual">FireBird creator’s manual</a> and <a href="#source-xinput-deadzone">Microsoft’s deadzone examples</a>.</p>
-        <p>A low circularity-error score only describes the output under that test and mapping. Firmware can reshape the outer boundary; a perfect-looking circle does not establish linear small movements, good center return, low latency or mechanical quality. Test those separately.</p>
-        <h3>After a repair or stick replacement</h3>
-        <p>Follow the exact module and board’s procedure. GuliKit, for example, instructs users to fit the case and screws before calibration and lists controller-specific tools. Do not assume a generic Windows or browser calibration command writes the right settings to every controller. <a class="cite" href="#source-gulikit">Maker’s calibration instructions ↗</a></p>
-        <p>For an OEM PlayStation controller, use tools that explicitly support its model and revision. A replacement board emulating a DualShock is not necessarily compatible with Sony calibration commands. The original dualshock-tools project documents its own scope. <a class="cite" href="#source-dualshock">Upstream project ↗</a></p>
-        <div class="check-panel"><h3>A practical check</h3><ol><li>Observe untouched sticks for offset and jitter.</li><li>Operate the triggers with both sticks untouched; look for unintended stick movement.</li><li>Make tiny movements; check for dead spots and jumps.</li><li>Sweep slowly through the full range, including diagonals.</li><li>Release from different directions and check return to center and snapback.</li><li>Check at your real in-game deadzone and curve, then repeat on the connection you use.</li></ol><p>These checks assess behavior. They do not independently measure input latency or certify future durability.</p></div>
+        <div class="pin-comparison">
+          <div><p class="mono kicker">WHAT 8K DOES</p><h3>More frequent updates</h3><p>Up to 8,000 reports a second, one every 0.125 ms, so the game is never waiting long for the next one.</p></div>
+          <div><p class="mono kicker">WHAT 8K DOESN’T PROMISE</p><h3>0.125 ms input lag</h3><p>Or fresh stick data in every report, or any change over Bluetooth or on a console. Sensor reading, processing, the game and your display all add time.</p></div>
+        </div>
+        <h3>Words to tell apart</h3>
+        <p><strong>Polling rate</strong> is what the PC asks for. <strong>Report rate</strong> is what actually arrives. <strong>Sampling rate</strong> is how often the controller reads its own sticks and buttons. <strong>Latency</strong> is press-to-result time. A claim should say which one it means. <a class="cite" href="#source-usb">USB interval docs ↗</a> <a class="cite" href="#source-deeppoll">DeepPoll’s scope ↗</a></p>
+        <h3>Why a tester might show about 1,000 Hz</h3>
+        <p>Some testers count how often a <em>stick value changes</em>, not how many reports arrive. A report can carry the same stick values as the one before it, so these tools can read lower than the real report rate. Use a tool that counts reports for polling, and a proper latency test for lag. <a class="cite" href="#source-polling">Polling tester source ↗</a></p>
+        <p>Browser gamepad testers usually update in step with your screen’s refresh. They’re great for checking behaviour, not for measuring USB rate. <a class="cite" href="#source-raf">Browser timing ↗</a></p>
+        <h3>What HIDUSBF can and can’t change</h3>
+        <p>HIDUSBF changes how often Windows polls a USB controller. It can’t change the sensor, add precision the hardware never captured, or make the controller’s firmware read its sticks faster. Asking for 8K doesn’t prove the controller sends 8K, so check the measured rate. It does nothing for Bluetooth or consoles. <a class="cite" href="#source-hidusbf">Original driver docs ↗</a></p>
+        <div class="callout measured-callout"><strong>One measured example <span class="evidence measured">Measured</span></strong><p>On the developer’s PC, a DualSense Edge on USB with HIDUSBF 4.0.2 delivered <strong>80,009 reports in 10.0 seconds</strong>, about 7,999 a second, counted as they were read. That shows 8K report delivery on that setup. It doesn’t show 8K fresh stick readings, lower input lag, or what another controller or PC will do.</p></div>
+        <h3>Bits aren’t the same as precision</h3>
+        <p>8 bits can hold 256 values, 12 bits 4,096, 16 bits 65,536. That’s how many values <em>can</em> be stored. Noise, sensor quality and filtering decide how many are useful. XInput always uses 16-bit stick fields, whatever the stick underneath could measure. <a class="cite" href="#source-xinput-structure">XINPUT_GAMEPAD ↗</a></p>
       </section>
 
       <section id="myths" class="chapter">
-        <p class="mono chapter-number">08 / COMMON MISCONCEPTIONS</p>
-        <h2>Claims worth questioning.</h2>
-        <p>Open a claim for the short correction. The supporting detail and sources are in the sections above.</p>
-        <div class="myth-list">
-          <details><summary>“TMR is another name for Hall effect.”</summary><p>Both sense magnetic fields, but use different physical effects. Neither term specifies the entire stick or controller. <a href="#sensors">Read about the sensors →</a></p></details>
-          <details><summary>“A magnetic stick can never drift.”</summary><p>Contactless sensing removes a source of wear. It does not stop mechanical wear, calibration errors or other failures. “Drift-resistant” is a more useful description than a lifetime guarantee. <a href="#sensors">What anti-drift means →</a></p></details>
-          <details><summary>“JS13 and TMR are competing technologies.”</summary><p>JS13 is a model-family designation; JS13 Pro+ is offered as TMR. Specify the complete part and controller variant. <a href="#modules">Module names explained →</a></p></details>
-          <details><summary>“Five-pin means TMR, faster polling or universal fit.”</summary><p>Pin count establishes none of those things. The documented MIDAS five-pin example uses Hall sensing and its matching Marius board. <a href="#pins">Check the interface →</a></p></details>
-          <details><summary>“8,000 Hz means 0.125 ms input lag.”</summary><p>0.125 ms is the nominal report interval. Latency requires a measurement with defined endpoints. Buttons and sticks may also have different processing paths. <a href="#specs">Read the numbers →</a></p></details>
-          <details><summary>“A 16-bit output guarantees 16-bit physical accuracy.”</summary><p>Output format, sensor resolution and effective precision are different. Filling a larger field cannot recover input detail that was never measured. <a href="#specs">Bits and usable precision →</a></p></details>
-          <details><summary>“A PS5 shell or DS4 mode proves console support.”</summary><p>A replacement board has its own protocol and authentication requirements. Check the exact console and game category, including any adapter requirement. <a href="#boards">Board compatibility →</a></p></details>
-          <details><summary>“Calibration repairs worn hardware.”</summary><p>Calibration changes how readings are interpreted. It cannot replace damaged contacts, worn plastic or a weak spring, and a large deadzone can conceal a problem. <a href="#calibration">Calibration limits →</a></p></details>
+        <p class="mono chapter-number">04 / MEASURED VS CLAIMED</p>
+        <h2>A decoder for spec sheets.</h2>
+        <p>Most numbers in a listing are one of four kinds. Knowing which is half the battle.</p>
+        <div class="evidence-key">
+          <p><span class="evidence measured">Measured</span> Someone tested a named unit, with a stated method.</p>
+          <p><span class="evidence">Maker spec</span> What the manufacturer says. Useful, but not independent.</p>
+          <p><span class="evidence arith">Arithmetic</span> Worked out from another number, not tested.</p>
+          <p><span class="evidence limited">Marketing</span> A phrase with no test attached.</p>
         </div>
+        <div class="claim-list">
+          <div class="claim"><h3>“8,000 Hz polling”</h3><p class="claim-kind"><span class="evidence">Maker spec</span></p><p>Usually true only in certain modes. Check wired vs 2.4 GHz vs Bluetooth, PC vs console, and whether anyone measured the report rate.</p></div>
+          <div class="claim"><h3>“0.125 ms input lag”</h3><p class="claim-kind"><span class="evidence arith">Arithmetic</span></p><p>It’s just 1,000 ÷ 8,000, the gap between reports. Real lag needs a test that names its method.</p></div>
+          <div class="claim"><h3>“Anti-drift” / “never drifts”</h3><p class="claim-kind"><span class="evidence limited">Marketing</span></p><p>Magnetic sticks remove one cause of drift. Check the warranty and whether replacement sticks are sold. <a href="#sensors">Why →</a></p></div>
+          <div class="claim"><h3>“12-bit ADC”, “4,000-level positioning”</h3><p class="claim-kind"><span class="evidence">Maker spec</span></p><p>Describes resolution on paper. Smooth small movements and a steady centre matter more; test those.</p></div>
+          <div class="claim"><h3>“16-bit stick output”</h3><p class="claim-kind"><span class="evidence arith">Format</span></p><p>The size of the box, not what’s in it. Filling a bigger field can’t create detail that was never measured.</p></div>
+          <div class="claim"><h3>“0% circularity error”</h3><p class="claim-kind"><span class="evidence measured">Measured</span> <span class="evidence limited">Narrow</span></p><p>Real, but it only checks the outer edge, and firmware can reshape that. It says nothing about centre, small movements or lag.</p></div>
+          <div class="claim"><h3>“World’s fastest controller”</h3><p class="claim-kind"><span class="evidence limited">Marketing</span></p><p>Ignore it unless a test method, controller, firmware and connection are published.</p></div>
+          <div class="claim"><h3>“PS5 shell” / “DS4 mode”</h3><p class="claim-kind"><span class="evidence limited">Not a guarantee</span></p><p>Describes the shape or what it pretends to be. Console games can need authentication. Ask about your exact console and game. <a class="cite" href="#source-gp2040">GP2040-CE notes ↗</a></p></div>
+          <div class="claim"><h3>“5-pin = better / TMR”</h3><p class="claim-kind"><span class="evidence limited">Not a spec</span></p><p>Pin count is about wiring. It doesn’t tell you the sensor type, speed or what it fits. <a href="#pins">Pins →</a></p></div>
+        </div>
+        <div class="callout"><strong>Even official pages can disagree with themselves.</strong><p>Flydigi’s Apex 5 store page gives stick tension as 30–100 gf in one place and 40–100 gf in another. GameSir’s Tarantula 8K PC product page headlines 0.25 ms latency, while its launch post said 0.5 ms response. When a maker’s own numbers conflict, ask which is current; don’t pick the nicer one. <a class="cite" href="#source-flydigi">Flydigi ↗</a> <a class="cite" href="#source-tarantula">GameSir page ↗</a> <a class="cite" href="#source-tarantula-launch">launch post ↗</a></p></div>
+      </section>
+
+      <section id="basics" class="chapter">
+        <p class="mono chapter-number">05 / SAME NAME, DIFFERENT CONTROLLER</p>
+        <h2>The suffix is the spec.</h2>
+        <p>These real examples come from the makers’ own pages, checked 30 October 2026. They show how much can change between models with nearly the same name. All rates here are <span class="evidence">Maker spec</span>.</p>
+        <div class="name-list">
+          <div class="name-pair"><h3>Razer Wolverine V3 Pro <span>vs</span> V3 Pro 8K PC</h3><p><strong>V3 Pro:</strong> Hall sticks, Xbox and PC. 1,000 Hz only in wired PC Tournament Mode; 250 Hz wireless and on Xbox.</p><p><strong>V3 Pro 8K PC:</strong> TMR sticks, PC only. 8,000 Hz advertised wired and on its HyperSpeed wireless dongle.</p><p class="name-src"><a href="#source-razer">V3 Pro ↗</a> <a href="#source-razer-8k">8K PC ↗</a></p></div>
+          <div class="name-pair"><h3>GameSir G7 Pro <span>vs</span> G7 Pro 8K PC</h3><p><strong>G7 Pro:</strong> TMR sticks, works wired on Xbox. 1,000 Hz on PC, wired and 2.4 GHz.</p><p><strong>G7 Pro 8K PC:</strong> a PC product. Up to 8,000 Hz over USB and 2.4 GHz.</p><p class="name-src"><a href="#source-g7pro">G7 Pro ↗</a> <a href="#source-g7pro-8k">8K PC ↗</a></p></div>
+          <div class="name-pair"><h3>8BitDo Ultimate 2 <span>vs</span> Ultimate 2C</h3><p><strong>Ultimate 2 Wireless:</strong> TMR sticks. 1,000 Hz over USB and 2.4 GHz. Its “8Speed” branding does <em>not</em> mean 8K.</p><p><strong>Ultimate 2C Wireless:</strong> Hall sticks and Hall triggers; a separate product.</p><p class="name-src"><a href="#source-8bitdo-u2">Ultimate 2 ↗</a> <a href="#source-8bitdo-u2c">Ultimate 2C ↗</a></p></div>
+          <div class="name-pair"><h3>SCUF Valor: Hall <span>or</span> TMR</h3><p>Wired Hall, wired TMR and wireless TMR versions all exist, and the manual gives different calibration steps for Hall and TMR models.</p><p>Valor Pro Wireless’s 1,000 Hz mode is wired PC only.</p><p class="name-src"><a href="#source-scuf-manual">Manual ↗</a> <a href="#source-scuf-tmr">Wired TMR ↗</a> <a href="#source-scuf-pro">Pro Wireless ↗</a></p></div>
+        </div>
+        <h3>Same shell, different inside</h3>
+        <p>A PlayStation-shaped controller can hold:</p>
+        <ul class="plain-list">
+          <li><strong>A stock board</strong>: exactly as it left the factory.</li>
+          <li><strong>A modified stock board</strong>: the original electronics plus paddles, new sticks or trigger stops.</li>
+          <li><strong>A replacement board</strong>: different electronics entirely. Features and console support follow the new board, not the badge on the shell.</li>
+        </ul>
+        <p><strong>“Modular” means replaceable, not magnetic.</strong> The DualSense Edge’s stick modules swap out by hand, but that says nothing about the sensor inside a replacement. <a class="cite" href="#source-sony">Sony’s instructions ↗</a></p>
+      </section>
+
+      <section id="modules" class="chapter">
+        <p class="mono chapter-number">06 / STICK MODULES &amp; PINS</p>
+        <h2>JS13 is a model. TMR is a technology.</h2>
+        <p>A stick module is the whole part: mechanism, sensor, size and wiring. The name on a listing often tells you only one of those.</p>
+        <div class="table-wrap" role="region" aria-label="Joystick module reference table" tabindex="0">
+          <table><caption>Identification notes from maker documentation. Not a ranking.</caption><thead><tr><th scope="col">Name you’ll see</th><th scope="col">What’s documented</th><th scope="col">What to check</th></tr></thead><tbody>
+            <tr><th scope="row">Alps RKJXV</th><td>A potentiometer stick family. Part RKJXV122400R lists 10 kΩ, 5 V max and 23° travel each way.</td><td>The exact part number. Those ratings aren’t universal controller specs. <a href="#source-alps">Source ↗</a></td></tr>
+            <tr><th scope="row">K-Silver JS13 Pro+</th><td>A TMR product, sold in separate variants for different controllers.</td><td>Full suffix and which controller. “JS13” alone isn’t enough. <a href="#source-ksilver">Source ↗</a></td></tr>
+            <tr><th scope="row">GuliKit TMR</th><td>Lists supported controllers and a calibration step after fitting.</td><td>The matching variant. “Drop-in” doesn’t always mean solder-free. <a href="#source-gulikit">Source ↗</a></td></tr>
+            <tr><th scope="row">Favor Union FJH10K TMR</th><td>An explicitly TMR product. The same maker sells other sensor types too.</td><td>The “TMR” suffix. The maker’s name alone doesn’t tell you the sensor. <a href="#source-favor">Source ↗</a></td></tr>
+            <tr><th scope="row">Ginfull RJ13 TMR</th><td>A TMR product in the maker’s catalogue.</td><td>Exact part and revision. Marketplace “V” numbers and colours aren’t an official system. <a href="#source-ginfull">Source ↗</a></td></tr>
+          </tbody></table>
+        </div>
+        <p><strong>Frame and sensor can come from different makers.</strong> “ALPS base” can mean an Alps frame carrying someone else’s magnetic sensors. Ask who made each.</p>
+        <p><strong>Tension is a spring, not a setting.</strong> Stiffer springs or taller sticks change feel. A sensitivity curve in software changes the output. One doesn’t replace the other.</p>
+
+        <h3 id="pins">Five pins aren’t a speed rating</h3>
+        <p>“3-pin” and “5-pin” count connections, and not even always the same ones (one sensor, a connector, or the whole mechanism). Three pins doesn’t mean potentiometer. Five pins doesn’t mean TMR, faster, or universal fit.</p>
+        <div class="callout"><strong>Real example: Marius MIDAS.</strong><p>Battle Beaver documents MIDAS as a five-pin <strong>Hall</strong> system. In its JDM-5X builds, three-pin and five-pin boards and sticks don’t mix; switching needs the matching board. That rule is for that product, not every five-pin part. <a class="cite" href="#source-bb">Builder docs ↗</a></p></div>
+        <p>Before any swap, confirm: <strong>footprint, what each pin does, voltage, output range, axis direction, firmware support and calibration</strong>. Fitting the holes is only the first check.</p>
+      </section>
+
+      <section id="boards" class="chapter">
+        <p class="mono chapter-number">07 / CUSTOM BOARDS</p>
+        <h2>The board matters. So does its version.</h2>
+        <p>Four different jobs get called “a board”:</p>
+        <ul class="plain-list">
+          <li><strong>Mainboard</strong>: runs the whole controller.</li>
+          <li><strong>Remap board</strong>: adds paddles that press existing buttons.</li>
+          <li><strong>Calibration board</strong>: adjusts a compatible stick circuit.</li>
+          <li><strong>Windows USB filter</strong> (like HIDUSBF): software on the PC, not hardware in the controller.</li>
+        </ul>
+        <p>Ask for the exact board, revision and firmware. Specs from one generation don’t carry over to the next, or back to the last.</p>
+
+        <div class="board-entry"><div class="board-heading"><h3>Marius / MH family</h3><span class="evidence">Maker + builder docs</span></div>
+          <p>A separate replacement board, not a Sony board with an overclock. The October 2025 MH4 Analog was announced as PC-only, DS4-format, sold without sticks, and without rumble, sound or gyro. Battle Beaver lists DS4-, DualSense- and Xbox-format Marius builds with native 8K on PC; the shell shape doesn’t mean it works on that console. <a class="cite" href="#source-marius-product">Announcement ↗</a> <a class="cite" href="#source-bb">Builder ↗</a></p>
+          <p>Its setup mode runs at 100–300 Hz, so don’t measure in setup mode. DeepPoll measures polling, not full input lag. <a class="cite" href="#source-marius-dev">Developer docs ↗</a> <a class="cite" href="#source-deeppoll">DeepPoll ↗</a></p>
+        </div>
+        <div class="board-entry"><div class="board-heading"><h3>FireBird / A*</h3><span class="evidence">Version-specific docs</span></div>
+          <p>The creator’s older manual covers PCB v2.4, tool v2.15 and firmware v2.24, and documents 1,000 Hz outside Switch mode. That isn’t a spec for every DS4 or A* build. The newer browser configurator warns that downgrading can lose settings. Match board, firmware, mode and tool before changing anything. <a class="cite" href="#source-firebird-manual">Manual ↗</a> <a class="cite" href="#source-firebird-tool">Configurator ↗</a></p>
+        </div>
+        <div class="board-entry"><div class="board-heading"><h3>Helium Strike / HyperStrike (HS2)</h3><span class="evidence limited">Couldn’t fully verify</span></div>
+          <p>These names appear in builder listings, but we couldn’t confirm a complete hardware spec and revision list. So we don’t give them a polling rate, console list or feature list. Ask the builder for the exact board, firmware and supported modes. <a class="cite" href="#source-hs2">HS2 configurator ↗</a></p>
+        </div>
+        <div class="board-entry"><div class="board-heading"><h3>SuiOvOi</h3><span class="evidence">Configurator</span></div>
+          <p>Its configurator has separate settings for USB report rate, stick sampling rate and precision, a good illustration that these are different numbers. Settings in a menu aren’t measurements. <a class="cite" href="#source-suiovoi">Configurator ↗</a></p>
+        </div>
+        <div class="board-entry"><div class="board-heading"><h3>GP2040-CE</h3><span class="evidence">Open project docs</span></div>
+          <p>Open firmware for RP2040 boards, popular in arcade and leverless controllers. Not a drop-in DualSense board. Its docs are clear that “PS5 mode” has authentication and game-type limits. <a class="cite" href="#source-gp2040">Compatibility docs ↗</a></p>
+        </div>
+        <div class="board-entry"><div class="board-heading"><h3>Remap kits (eXtremeRate and similar)</h3><span class="evidence">Exact-SKU docs</span></div>
+          <p>Add rear buttons to the original board. Compatibility is per kit and per controller revision: for example, eXtremeRate’s RISE4 Plus MAX (HKCPFJ001M3) lists specific DualSense board revisions. <a class="cite" href="#source-extremerate">Kit spec ↗</a></p>
+        </div>
+        <div class="callout"><strong>8K doesn’t automatically cost you features, but a new board might.</strong><p>Audio, rumble, gyro, touch tracking, adaptive triggers, battery and wireless depend on the board and build. A touchpad can still click while touch tracking is gone. Ask for a list of what’s kept.</p></div>
+      </section>
+
+      <section id="calibration" class="chapter">
+        <p class="mono chapter-number">08 / CALIBRATION &amp; TESTING</p>
+        <h2>A clean circle isn’t the whole test.</h2>
+        <dl class="terms">
+          <div><dt>Centre calibration</dt><dd>Sets where “neutral” is. Fixes an offset; can’t fix a loose or damaged stick.</dd></div>
+          <div><dt>Range calibration</dt><dd>Sets the edges. Afterwards, check every direction and diagonal, not just left and right.</dd></div>
+          <div><dt>Inner deadzone</dt><dd>Ignores small movement near centre. Hides noise and offsets, but leaves a spot with no response. Zero isn’t always best.</dd></div>
+          <div><dt>Outer deadzone</dt><dd>Where full output kicks in. Set too aggressively, it clips your travel.</dd></div>
+          <div><dt>Response curve</dt><dd>How stick movement maps to output. Personal preference and game-dependent, not a sensor feature.</dd></div>
+          <div><dt>Snapback filter</dt><dd>Hides the brief opposite input when a released stick overshoots centre. Effect depends on the setting.</dd></div>
+        </dl>
+        <p class="source-line">Concepts from the <a href="#source-firebird-manual">FireBird manual</a> and <a href="#source-xinput-deadzone">Microsoft’s deadzone examples</a>.</p>
+        <p><strong>After replacing a stick, follow that part’s own steps.</strong> GuliKit, for example, says to close the case and fit the screws <em>before</em> calibrating. A generic Windows or browser calibration may not write the right settings to your controller, and a replacement board that imitates a DualShock may not accept Sony calibration at all. <a class="cite" href="#source-gulikit">GuliKit ↗</a> <a class="cite" href="#source-dualshock">dualshock-tools ↗</a></p>
+        <div class="check-panel"><h3>A two-minute check</h3><ol><li>Leave both sticks alone. Look for offset or jitter.</li><li>Press the triggers without touching the sticks. The sticks shouldn’t move.</li><li>Make tiny movements. Look for dead spots or jumps.</li><li>Sweep slowly through the full range, diagonals included.</li><li>Let go from different directions. Check it returns to centre without bouncing past.</li><li>Repeat with your real in-game deadzone, on the connection you actually use.</li></ol><p>This checks behaviour. It doesn’t measure input lag or predict how long the sticks will last.</p></div>
       </section>
 
       <section id="buying" class="chapter">
         <p class="mono chapter-number">09 / BEFORE YOU BUY</p>
-        <h2>Ask for the complete specification.</h2>
-        <p>A useful product listing should let you answer these questions without guessing from a shell photo or a headline number.</p>
-        <ol class="buying-list"><li><strong>What exactly is installed?</strong> Controller format, PCB model/revision, firmware, full stick model, sensor technology and electrical interface.</li><li><strong>Where does it work?</strong> Your platform and game, wired/wireless mode, native support or adapter requirement, and any authentication or feature limits.</li><li><strong>What stays and what goes?</strong> Audio, gyro, rumble, adaptive or analog triggers, touch tracking, touchpad button, battery and wireless operation.</li><li><strong>What was actually measured?</strong> Polling versus latency, button versus stick results, conditions, firmware and complete test method.</li><li><strong>How is it maintained?</strong> Correct calibration tool, update/recovery instructions, replacement availability and the seller’s written repair/warranty terms.</li></ol>
-        <p>The sensible choice is the one whose compatibility, physical feel and measured behavior suit your use. A newer sensor can be an improvement without making every older controller obsolete.</p>
+        <h2>Five questions to answer first.</h2>
+        <p>A good listing answers these without you guessing from a shell photo or a headline number.</p>
+        <ol class="buying-list"><li><strong>What exactly is inside?</strong> Board and revision, firmware, full stick model, sensor type and wiring.</li><li><strong>Where does it work?</strong> Your console or PC, wired or wireless, and whether it needs an adapter. Any games that won’t work?</li><li><strong>What’s kept and what’s gone?</strong> Audio, gyro, rumble, adaptive triggers, touchpad tracking, battery, wireless.</li><li><strong>What was measured, and how?</strong> Polling or latency? Buttons or sticks? Which firmware and connection?</li><li><strong>How is it looked after?</strong> Which calibration tool, how to update or recover it, spare parts, and the written warranty.</li></ol>
+        <div class="seller-note">
+          <p class="mono kicker">COPY THIS TO A SELLER</p>
+          <p>Hi, before I order, could you confirm: (1) the exact board/PCB and firmware version, (2) the stick module part name and sensor type, (3) which consoles and PC modes it works in, wired and wireless, (4) which features are kept (rumble, gyro, audio, touchpad, adaptive triggers, wireless), (5) whether the polling rate or latency was measured and how, and (6) how calibration and repairs are handled? Thanks!</p>
+        </div>
+        <h3>Red flags</h3>
+        <ul class="plain-list flags">
+          <li>Only a photo of the shell; no board or stick named.</li>
+          <li>A latency figure with no method, firmware or connection.</li>
+          <li>“Universal fit”, “never drifts” or “works on PS5” with no limits listed.</li>
+          <li>A rate quoted without saying wired, 2.4 GHz or Bluetooth.</li>
+        </ul>
+        <p>The right controller is the one whose fit, feel and measured behaviour suit how you play. A newer sensor can be an upgrade without making your current controller obsolete.</p>
       </section>
 
       <section id="sources" class="chapter source-chapter">
         <p class="mono chapter-number">10 / SOURCES &amp; CORRECTIONS</p>
         <h2>Check the evidence.</h2>
-        <p>This guide draws on manufacturer engineering documentation, creator/project documentation and identified builders describing their own products. A vendor’s specification is attributed documentation, not an independent bench test. No controllers were physically tested for this article.</p>
-        <p><strong>Last checked: 30 October 2026.</strong> Firmware, production revisions and builder configurations can change. We exclude unsupported universal latency rankings and unverified marketplace bit-depth, power and lifetime figures. Limited access is called out rather than filled in with a guess.</p>
+        <p>This guide uses engineering documents for how things work, and maker or builder documents for product claims. A maker’s spec is attributed, not independently tested. <strong>The only hands-on measurement here is the DualSense Edge report count in section 03.</strong> No other controllers were tested for this page.</p>
+        <p><strong>Last checked: 30 October 2026.</strong> Firmware, revisions and builds change. Where we couldn’t verify something, we say so instead of guessing.</p>
         <ol class="source-list">
           <li id="source-alps"><a href="https://tech.alpsalpine.com/e/products/detail/RKJXV122400R/">Alps Alpine — RKJXV122400R product specification</a><p>Manufacturer. Exact potentiometer part, electrical and mechanical ratings; not a specification for all OEM controllers.</p></li>
           <li id="source-ti"><a href="https://www.ti.com/lit/pdf/slyu064">Texas Instruments — Joystick and Lever Design With Hall-Effect Sensors</a><p>Engineering application note SLYU064A. Sensor arrangement, analog processing, mechanical design and error sources.</p></li>
           <li id="source-tdk"><a href="https://product.tdk.com/en/techlibrary/productoverview/tmr-angle-sensors.html">TDK — TMR sensing principles</a><p>Manufacturer engineering overview. The physical principle does not establish a finished controller’s performance.</p></li>
+          <li id="source-aknes"><a href="https://aknes.com/products/aknes-v7-tmr-angle-sensing-joysticks">AKNES — HallPi V7 AK208/AK209 TMR joysticks</a><p>Seller product page. Includes the warning that Xbox trigger magnets can affect readings; its own test figures are seller-reported.</p></li>
           <li id="source-ksilver"><a href="https://germany.alibaba.com/product-detail/K-SILVER-JS13-PRO-TMR-Joystick_1601621223047.html">Guangdong K-Silver Industrial — JS13 Pro+ factory-associated listing</a><p>Manufacturer marketplace listing. Supports identity and offered variants; not an independently validated electrical datasheet.</p></li>
           <li id="source-gulikit"><a href="https://www.gulikit.com/productinfo/1251251.html">GuliKit — TMR Electromagnetic Joystick</a><p>Manufacturer product and controller-specific installation/calibration guidance.</p></li>
           <li id="source-favor"><a href="https://www.favor-union.com/en/catalog/Joystick/JoyStick-TMR/FJH10K-TMR-/">Favor Union — FJH10K TMR</a><p>Manufacturer product identity. Preserve the technology suffix when matching parts.</p></li>
           <li id="source-ginfull"><a href="https://www.ginfull.com/en/products/295.html">Ginfull — RJ13 TMR product</a><p>Manufacturer catalogue. Does not validate every reseller’s revision/color terminology.</p></li>
+          <li id="source-razer"><a href="https://www.razer.com/console-controllers/razer-wolverine-v3-pro">Razer — Wolverine V3 Pro</a><p>Manufacturer product page and FAQ. Hall sticks; 250 Hz wireless/Xbox, 1,000 Hz wired PC Tournament Mode.</p></li>
+          <li id="source-razer-8k"><a href="https://www.razer.com/newsroom/product-news/razer-wolverine-v3-pro-8k-pc">Razer — Wolverine V3 Pro 8K PC announcement</a><p>Manufacturer. TMR sticks, PC-specific, advertised 8,000 Hz wired and wireless.</p></li>
+          <li id="source-g7pro"><a href="https://gamesir.com/pages/faq-questions-about-g7-pro">GameSir — G7 Pro FAQ</a><p>Manufacturer. 1,000 Hz on PC wired and 2.4 GHz; does not state that rate for Xbox or Bluetooth.</p></li>
+          <li id="source-g7pro-8k"><a href="https://gamesir.com/products/gamesir-g7-pro-8k-pc/buy">GameSir — G7 Pro 8K PC specification page</a><p>Manufacturer. Up to 8,000 Hz over USB and 2.4 GHz; showed pre-order wording when checked.</p></li>
+          <li id="source-tarantula"><a href="https://gamesir.com/products/gamesir-tarantula-8k-pc">GameSir — Tarantula 8K PC product page</a><p>Manufacturer. Headline latency figure differs from the launch post.</p></li>
+          <li id="source-tarantula-launch"><a href="https://gamesir.com/resources/blog/gamesir-tarantula-series-be-competitive-be-pro-pre-order-available-now">GameSir — Tarantula series launch post</a><p>Manufacturer, April 2026. Gives a different response figure from the current product page.</p></li>
+          <li id="source-8bitdo-u2"><a href="https://www.8bitdo.com/ultimate-2-wireless-controller/">8BitDo — Ultimate 2 Wireless</a><p>Manufacturer. TMR sticks; 1,000 Hz over USB/2.4 GHz described as laboratory data. “8Speed” is not an 8K claim.</p></li>
+          <li id="source-8bitdo-u2c"><a href="https://www.8bitdo.com/ultimate-2c-wireless-controller/">8BitDo — Ultimate 2C Wireless</a><p>Manufacturer. Hall sticks and triggers; a separate product from Ultimate 2.</p></li>
+          <li id="source-flydigi"><a href="https://shops.flydigi.com/products/apex5">Flydigi — Apex 5</a><p>Manufacturer store page. Hall sticks; tension and latency figures conflict within the page.</p></li>
+          <li id="source-scuf-manual"><a href="https://www.scufgaming.com/us/en/gaming/products/scuf-products/valor-pro/">SCUF — Valor family manual</a><p>Manufacturer. Covers Wireless, Wired Hall and Wired TMR separately, with different calibration preparation.</p></li>
+          <li id="source-scuf-tmr"><a href="https://www.scufgaming.com/us/en/p/scuf-valor-pro-black-tmr">SCUF — Valor Wired with TMR</a><p>Manufacturer listing, SKU 505-178-06-001-WW.</p></li>
+          <li id="source-scuf-pro"><a href="https://ir.corsair.com/news-releases/news-release-details/scuf-gamings-new-valor-pro-wireless-controller-gives-decisive">SCUF — Valor Pro Wireless announcement</a><p>Manufacturer (Corsair). Read with the manual, which limits 1K to wired PC.</p></li>
           <li id="source-marius-product"><a href="https://www.patreon.com/mariusheier/posts/new-product-mh4-140932940">Marius Heier — MH4 Analog announcement, 10 October 2025</a><p>Creator’s dated product description. Scope the omissions and compatibility to that generation.</p></li>
           <li id="source-marius-dev"><a href="https://developer.mariusheier.com/">Marius Heier — MH4 developer documentation</a><p>Creator documentation, including setup mode versus normal operation.</p></li>
           <li id="source-bb"><a href="https://battlebeavercustoms.com/pages/marius-advanced-calibration">Battle Beaver — Marius setup, compatibility and MIDAS notes</a><p>Builder’s firsthand product documentation. Three/five-pin compatibility and current family listings describe its builds.</p></li>
           <li id="source-deeppoll"><a href="https://github.com/MariusHeier/deeppoll/releases">Marius Heier — DeepPoll release notes</a><p>Tool creator. Polling measurement, mode handling and scope.</p></li>
+          <li id="source-polling"><a href="https://github.com/cakama3a/Polling/blob/8c34ed6fc14c3bce49c80e03f4618749aa1424f8/Python.py">Polling (Gamepadla tester) — Python source at an inspected commit</a><p>Timestamps changes in selected stick values, which is a different thing from counting every report. Applies to this version of the code.</p></li>
           <li id="source-firebird-manual"><a href="https://blog.bzl-web.com/entry/2023/12/19/024328">FireBird creator — configuration and technical manual</a><p>Japanese-language creator documentation, explicitly scoped to PCB v2.4 / tool v2.15 / firmware v2.24.</p></li>
           <li id="source-firebird-tool"><a href="https://bzl-web.com/tool/firebird/">FireBird creator — browser configuration tool</a><p>Creator’s current tool. Firmware generation and downgrade caveats; do not update hardware merely to read this guide.</p></li>
           <li id="source-hs2"><a href="https://hs2.evua.cc/">HS2 configuration page</a><p>Web configurator; a complete hardware/revision specification was not verified. Not used as proof of exact hardware specifications.</p></li>
           <li id="source-suiovoi"><a href="https://sy2.suiovoi.cc/">SuiOvOi — configuration interface</a><p>Separate controls for report rate, sampling and output precision. Menu options are not independent measurements.</p></li>
           <li id="source-gp2040"><a href="https://gp2040-ce.info/faq/faq-console-compatibility/">GP2040-CE — console compatibility</a><p>Project documentation. Mode, authentication and game-category requirements.</p></li>
-          <li id="source-gp2040-performance"><a href="https://gp2040-ce.info/">GP2040-CE — project and performance documentation</a><p>Project-published latency methodology and mode-specific results; not a cross-market ranking.</p></li>
           <li id="source-extremerate"><a href="https://www.extremerate.com/products/extremerate-real-metal-buttons-rmb-version-rise4-plus-max-back-paddles-kit-with-clicky-trigger-stops-rubberized-grip-for-ps5-controller-bdm-030-040-050-060-black">eXtremeRate — RISE4 Plus MAX, HKCPFJ001M3</a><p>Manufacturer. Compatibility applies to this exact remap kit, not every RISE product.</p></li>
           <li id="source-sony"><a href="https://www.playstation.com/en-us/support/hardware/edge-replace-stick/">PlayStation Support — replace a DualSense Edge stick module</a><p>First-party instructions for the complete removable assembly.</p></li>
-          <li id="source-xinput"><a href="https://learn.microsoft.com/en-us/windows/win32/xinput/xinput-and-directinput">Microsoft — XInput and DirectInput</a><p>Platform interface distinctions.</p></li>
           <li id="source-xinput-structure"><a href="https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad">Microsoft — XINPUT_GAMEPAD</a><p>Stick field representation and trigger ranges.</p></li>
           <li id="source-xinput-deadzone"><a href="https://learn.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput">Microsoft — getting started with XInput</a><p>Deadzones, normalization and example application-side processing.</p></li>
           <li id="source-raf"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame">MDN — requestAnimationFrame</a><p>Browser observation cadence and display-refresh limitations.</p></li>
@@ -246,7 +312,7 @@
           <li id="source-hidusbf"><a href="https://github.com/LordOfMice/hidusbf">SweetLow / LordOfMice — original hidusbf documentation</a><p>Driver scope and hardware/Windows-dependent limitations.</p></li>
           <li id="source-dualshock"><a href="https://github.com/dualshock-tools/dualshock-tools.github.io">dualshock-tools — upstream calibration project</a><p>Calibration project source, supported functionality and limitations.</p></li>
         </ol>
-        <div class="correction"><h3>Found a change or an error?</h3><p><a href="https://github.com/KazboXIII/HIDUSBF/issues/new?title=Information%20page%20correction">Suggest a correction</a> with the exact product/revision, the claim and a manufacturer document or reproducible test. This is a dated reference, not a claim that every product revision has been tested.</p></div>
+        <div class="correction"><h3>Spotted a mistake or a change?</h3><p><a href="https://github.com/KazboXIII/HIDUSBF/issues/new?title=Information%20page%20correction">Suggest a correction</a>. Include the exact product and revision, the claim, and a maker document or a test someone else can repeat.</p></div>
       </section>
     </article>
   </div>

@@ -80,16 +80,42 @@ td { color: var(--reading-muted); }
 .check-panel ol { padding-left: 24px; margin: 0 0 16px; color: var(--reading-muted); font-size: 15px; }
 .check-panel li { padding-left: 6px; margin-bottom: 10px; }
 .check-panel p { font-size: 13px; margin: 0; }
-.myth-list { margin: 28px 0; }
-.myth-list details { border-bottom: 1px solid var(--line-hi); }
-.myth-list details:first-child { border-top: 1px solid var(--line-hi); }
-.myth-list summary { cursor: pointer; padding: 20px 8px 20px 0; color: var(--label); font-size: 16px; }
-.myth-list summary::marker { color: var(--accent-soft); font-size: 12px; }
-.myth-list details[open] summary { color: var(--accent-soft); }
-.myth-list details p { padding: 0 12px 8px 20px; font-size: 15px; }
 .buying-list { margin: 28px 0; padding-left: 24px; color: var(--reading-muted); }
 .buying-list li { padding-left: 10px; margin-bottom: 22px; }
 .buying-list li::marker { color: var(--accent-soft); font-family: var(--mono); font-size: 13px; }
+.short-list { margin: 0; padding-left: 22px; color: var(--reading-muted); }
+.short-list li { padding-left: 6px; margin-bottom: 10px; }
+.short-list li::marker { color: var(--accent-soft); font: 12px var(--mono); }
+.takeaway .jump { margin-top: 14px; }
+.jump a { color: var(--accent-soft); text-underline-offset: 3px; }
+.glossary { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; border-top: 1px solid var(--line); }
+.glossary > div { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; }
+.glossary dd { font-size: 14.5px; }
+.evidence.measured { color: #9fe0b4; border-color: #22452f; background: #0c1711; }
+.evidence.arith { color: #a9c7ff; border-color: #263a5c; background: #0c1220; }
+.evidence-key { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; margin: 24px 0; padding: 18px 20px; border: 1px solid var(--line-hi); border-radius: 10px; background: var(--surface); }
+.evidence-key p { margin: 0 !important; font-size: 14px; }
+.evidence-key .evidence { margin-right: 8px; }
+.claim-list { margin: 26px 0; border-top: 1px solid var(--line-hi); }
+.claim { display: grid; grid-template-columns: minmax(0, 1.1fr) 150px minmax(0, 1.6fr); gap: 8px 22px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--line-hi); }
+.claim h3 { margin: 0; font-size: 16px; color: var(--label); }
+.claim p { margin: 0 !important; font-size: 15px; }
+.claim .claim-kind { display: flex; flex-wrap: wrap; gap: 6px; }
+.measured-callout { border-left-color: #4fa36b; background: #0c120e; }
+.measured-callout > strong { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.name-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 26px 0 8px; }
+.name-pair { padding: 20px; border: 1px solid var(--line-hi); border-radius: 10px; background: var(--surface); }
+.name-pair h3 { margin: 0 0 12px; font-size: 17px; }
+.name-pair h3 span { color: var(--accent-soft); font: 12px var(--mono); padding: 0 4px; }
+.name-pair p { font-size: 14.5px; margin-bottom: 10px !important; }
+.name-pair p.name-src { margin: 14px 0 0 !important; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; display: flex; gap: 16px; flex-wrap: wrap; }
+.plain-list { margin: 0 0 20px; padding-left: 22px; color: var(--reading-muted); }
+.plain-list li { padding-left: 4px; margin-bottom: 8px; }
+.plain-list li::marker { color: var(--accent-soft); }
+.flags li::marker { content: "✕  "; color: #e8c487; font-size: 12px; }
+.seller-note { margin: 8px 0 30px; padding: 20px 22px; border: 1px dashed #4a3a6b; border-radius: 10px; background: #0e0b15; }
+.seller-note .kicker { margin: 0 0 10px !important; }
+.seller-note p:last-child { margin: 0; color: var(--label); font-size: 15px; user-select: all; }
 .source-list { padding-left: 24px; margin: 30px 0; }
 .source-list li { padding: 16px 0 16px 8px; border-bottom: 1px solid var(--line); scroll-margin-top: 90px; font-size: 14px; overflow-wrap: anywhere; }
 .source-list li::marker { color: var(--reading-muted); font: 11px var(--mono); }
@@ -97,8 +123,8 @@ td { color: var(--reading-muted); }
 .correction { border: 1px solid var(--line-hi); border-radius: 10px; padding: 24px; margin-top: 30px; }
 .correction h3 { margin-top: 0; }
 .correction p { font-size: 14px; margin-bottom: 0; }
-@media (hover: hover) and (pointer: fine) { .contents nav a:hover { color: var(--text); } .guide a:hover { color: var(--text); } .myth-list summary:hover { color: var(--accent-soft); } }
-@media (max-width: 1050px) { .reading-layout { grid-template-columns: 185px minmax(0, 1fr); gap: 32px; } .sensor-grid { grid-template-columns: 1fr; } .sensor-card { display: block; } .sensor-card p.sensor-foot { margin-top: 14px; } }
+@media (hover: hover) and (pointer: fine) { .contents nav a:hover { color: var(--text); } .guide a:hover { color: var(--text); } }
+@media (max-width: 1050px) { .reading-layout { grid-template-columns: 185px minmax(0, 1fr); gap: 32px; } .sensor-grid { grid-template-columns: 1fr; } .sensor-card { display: block; } .sensor-card p.sensor-foot { margin-top: 14px; } .name-list { grid-template-columns: 1fr; } .claim { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); } .claim .claim-kind { grid-column: 1; grid-row: 2; } .claim > p:last-child { grid-column: 2; grid-row: 1 / span 2; } }
 @media (max-width: 760px) {
   .info-hero { padding-bottom: 40px; }
   .takeaway { grid-template-columns: 1fr; gap: 12px; padding: 22px; margin-top: 30px; }
@@ -111,6 +137,9 @@ td { color: var(--reading-muted); }
   .guide .chapter { padding-top: 32px; margin-bottom: 26px; }
   .guide p { font-size: 16px; }
   .pin-comparison { grid-template-columns: 1fr; gap: 10px; }
+  .glossary, .evidence-key { grid-template-columns: 1fr; }
+  .claim { grid-template-columns: 1fr; gap: 8px; }
+  .claim .claim-kind, .claim > p:last-child { grid-column: auto; grid-row: auto; }
   .sensor-card p, .callout p, .pin-comparison p { font-size: 15px; }
   .source-list p { font-size: 12px; }
 }
@@ -118,6 +147,5 @@ td { color: var(--reading-muted); }
   .terms > div { grid-template-columns: 1fr; gap: 8px; }
   .rate-figure { padding: 18px 14px; }
   .rate-row { grid-template-columns: 72px 1fr 72px; font-size: 11px; gap: 8px; }
-  .contents nav { grid-template-columns: 1fr; }
   .board-heading h3 { font-size: 22px; }
 }
