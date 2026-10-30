@@ -61,6 +61,7 @@ section { max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 40px); 
 .tag { margin: 0 0 8px; color: var(--accent-soft); font-size: 14px; }
 h2 { margin: 0 0 16px; color: var(--text); font-size: clamp(30px, 4vw, 42px); line-height: 1.15; }
 .feature p:not(.tag) { margin: 0 0 14px; color: var(--muted); }
+.feature p.support { margin-top: 22px; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); font-size: 15px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; padding: 8px 0 clamp(56px, 8vw, 96px); }
 .card { padding: 22px 22px 20px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); transition: border-color .2s, transform .2s; }
 .card:hover { border-color: var(--line-hi); transform: translateY(-2px); }
